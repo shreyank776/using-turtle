@@ -1,0 +1,69 @@
+import turtle
+
+def draw_USA_flag():
+    flag_height = 180
+    flag_width = 340
+    start_x = -170
+    start_y = 125
+    stripe_height = flag_height / 13
+    stripe_width = flag_width
+    star_size = 4.5
+
+    flag_turtle = turtle.Turtle()
+    flag_turtle.speed(0)
+    flag_turtle.penup()
+    flag_turtle.hideturtle()
+
+    def draw_fill_rectangle(x, y, width, height, color):
+        flag_turtle.goto(x, y)
+        flag_turtle.setheading(0)
+        flag_turtle.pendown()
+        flag_turtle.color(color)
+        flag_turtle.begin_fill()
+        for _ in range(2):
+            flag_turtle.forward(width)
+            flag_turtle.right(90)
+            flag_turtle.forward(height)
+            flag_turtle.right(90)
+        flag_turtle.end_fill()
+        flag_turtle.penup()
+
+    def draw_star(x, y, color, length):
+        flag_turtle.goto(x, y)
+        flag_turtle.setheading(0)
+        flag_turtle.pendown()
+        flag_turtle.color(color)
+        flag_turtle.begin_fill()
+        for _ in range(5):
+            flag_turtle.forward(length)
+            flag_turtle.right(144)
+        flag_turtle.end_fill()
+        flag_turtle.penup()
+
+    #This draws the 13 Stripes
+    y = start_y
+    for stripe in range(6):
+        for color in ['red', 'white']:
+            draw_fill_rectangle(start_x, y, stripe_width, stripe_height, color)
+            y -= stripe_height
+    draw_fill_rectangle(start_x, y, stripe_width, stripe_height, 'red')
+
+    #This draws the Blue Box across exactly 7 stripes
+    square_height = 7 * stripe_height
+    square_width = 0.42 * flag_width
+    draw_fill_rectangle(start_x, start_y, square_width, square_height, 'navy')
+
+    #This draws the 50 stars in the blue box
+    curr_y = start_y - 9
+    for row in range(9):
+        if row % 2 == 0:
+            curr_x = start_x + 10
+            for _ in range(6):
+                draw_star(curr_x, curr_y, 'white', star_size)
+                curr_x += 23
+        else:
+            curr_x = start_x + 21.5
+            for _ in range(5):
+                draw_star(curr_x, curr_y, 'white', star_size)
+                curr_x += 23
+        curr_y -= 10.2
