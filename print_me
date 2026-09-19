@@ -1,0 +1,9 @@
+from datetime import datetime
+import os 
+import sys
+import turtle
+
+def print_me_first(program_filename):
+    print("Name: Shreyank Kamatala")
+    print("Program: olympics.py")
+    print("Date: " + datetime.now().strftime("%b-%d-%Y %a (%I:%M:%S %p)"))
